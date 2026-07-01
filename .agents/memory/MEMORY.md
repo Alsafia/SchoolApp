@@ -1,0 +1,1 @@
+- [Supabase nested joins failure](supabase-nested-joins.md) — never use nested joins in this project; use flat queries + client-side Maps instead.

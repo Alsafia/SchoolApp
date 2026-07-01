@@ -1,0 +1,128 @@
+قم بتعديل شاشة "إضافة طالب جديد" كما يلي:
+
+## 1) تنسيق الحقول:
+- اجعل حقل "الاسم الكامل" و "الجنس" في صف واحد (Row واحد).
+- اجعل عرض حقل "الاسم الكامل أكبر من حقل الجنس".
+
+- اجعل الحقول التالية في صف واحد:
+  (تاريخ الميلاد + المرحلة الدراسية + الصف الدراسي)
+
+---
+
+## 2) حقل الحالة:
+- قم بإخفاء حقل "الحالة" من الواجهة بالكامل.
+- اجعل قيمة الحالة تلقائياً عند الحفظ = "نشط" (active).
+
+---
+
+## 3) تقسيم النموذج إلى مرحلتين (Wizard):
+
+### المرحلة الأولى:
+- الاسم الكامل
+- الجنس
+- تاريخ الميلاد
+- المرحلة الدراسية
+- الصف الدراسي
+- زر "التالي"
+
+عند الضغط على "التالي" يتم الانتقال للمرحلة الثانية.
+
+---
+
+### المرحلة الثانية:
+- اسم ولي الأمر
+- هاتف ولي الأمر
+- الموقع الجغرافي:
+  - المحافظة
+  - المديرية
+  - العزلة / المنطقة
+  - القرية / الحارة
+
+- زر "إضافة الطالب"
+
+---
+
+## 4) منطق العمل:
+- المرحلة الأولى تحفظ البيانات مؤقتاً (state).
+- المرحلة الثانية تكمل البيانات ثم يتم إرسال كل البيانات مرة واحدة لحفظ:
+  - الطالب في جدول students
+  - وتسجيله في student_enrollments تلقائياً
+
+
+في قاعدة البيانات لدي
+table_name
+academic_years
+areas
+attendance
+backups
+branches
+classes
+conversation_participants
+conversations
+districts
+exam_grades
+exams
+guardians
+message_attachments
+messages
+notifications
+payments
+profiles
+provinces
+schedules
+settings
+stages
+student_enrollments
+student_fees
+students
+subjects
+teachers
+v_attendance_daily_summary
+v_current_students
+v_financial_summary
+v_monthly_payments
+villages
+
+ في جدول students فيه الحقول التالية 
+
+column_name,data_type,is_nullable
+id,uuid,NO
+full_name,text,NO
+national_id,text,YES
+gender,text,NO
+date_of_birth,date,YES
+status,text,YES
+created_at,timestamp with time zone,YES
+province_id,uuid,YES
+district_id,uuid,YES
+area_id,uuid,YES
+village_id,uuid,YES
+guardian_id,uuid,YES
+
+وهذا جدول  guardians
+column_name,data_type,is_nullable
+id,uuid,NO
+full_name,text,NO
+phone,text,YES
+relationship,text,YES
+created_at,timestamp without time zone,YES
+
+
+وهذا جدول student_enrollments
+column_name,data_type,is_nullable
+id,uuid,NO
+student_id,uuid,NO
+class_id,uuid,NO
+start_date,date,NO
+end_date,date,YES
+is_current,boolean,NO
+created_at,timestamp with time zone,YES
+academic_year_id,uuid,YES
+
+مهم جداً:
+
+- جدول classes يحتوي على stage_id ويرتبط بـ stages.
+- المرحلة الدراسية يتم تحديدها من classes.stage_id فقط.
+- الصف الدراسي هو classes فقط.
+- لا يتم تخزين stage_id أو class_id داخل students نهائياً.
+- الربط الأكاديمي يتم فقط عبر student_enrollments.

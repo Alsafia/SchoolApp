@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+  --radius: 0.75rem;
+
+  /* Background */
+  --background: 220 14% 97%;
+  --foreground: 220 20% 15%;
+
+  /* Cards */
+  --card: 0 0% 100%;
+  --card-foreground: 220 20% 15%;
+
+  /* Popover */
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 20% 15%;
+
+  /* Primary */
+  --primary: 221 83% 53%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary & muted */
+  --secondary: 220 20% 95%;
+  --secondary-foreground: 222 47% 25%;
+  --muted: 220 20% 95%;
+  --muted-foreground: 220 10% 50%;
+
+  /* Accent */
+  --accent: 220 30% 92%;
+  --accent-foreground: 220 40% 25%;
+
+  /* Status */
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 45%;
+  --success-foreground: 0 0% 100%;
+  --warning: 43 96% 56%;
+  --warning-foreground: 43 80% 20%;
+
+  /* Borders & inputs */
+  --border: 220 15% 90%;
+  --input: 220 15% 90%;
+
+  /* Sidebar */
+  --sidebar: 222 47% 20%;
+  --sidebar-foreground: 220 20% 90%;
+  --sidebar-accent: 222 40% 28%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 222 40% 28%;
+}
+
+
+  
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cairo", "Tajawal", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+[data-sonner-toaster] {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+.custom-toast[data-type="success"] {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 1px solid #34d399;
+}
+
+/* سماوي خفيف جدًا جدًا */
+body {
+  background-color: #d1fae5;
+}
+html, body, #root {
+  height: 100%;
+  background-color: #d1fae5;
+}
+html, body, #root {
+  height: 100%;
+  background-color: #f5fdff !important;
+}  
